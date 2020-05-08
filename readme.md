@@ -48,48 +48,83 @@
 
 #随机文本生成函数，定义了一些封面的热门词汇进行随机拼接（手动狗头）
 def text_generate():
+    
     phrase1 = ['Fashionable guy', 'Celebrity', 'Star', 'King', 'Contender', 'Lighter', 'Entrepreneur', 'Economist', 'Hero', 'Gambling monster']
+    
     phrase2 = ['Asia', 'Ahowbiz', 'World', 'Pecado', 'Business community', 'Zuan', 'Wangzhe Canyon', 'Africa', 'Arctic', 'School']
+    
     phrase3 = ['How to be the ', 'Person of the year:', 'People who change the world:']
+    
     a = random.randint(0,9)
+    
     b = random.randint(0,9)
+    
     c = random.randint(0,2)
+    
     str1 = phrase3[c] 
+    
     str2 = phrase1[a] +' of '+ phrase2[b]
+    
     return str1, str2
   
 #图像融合函数，将人像轮廓图片背景融合
 def fuse_back(img, background):
+    
     a = random.randint(0,20)
+    
     img = img.convert('RGBA')
+    
     background = background.convert('RGBA')
+    
     sp = img.size
+    
     width = sp[0]
+    
     height = sp[1]
+    
     sp2 = background.size
+    
     w = sp2[0]
+    
     h = sp2[1]
+    
     box = (a, a, a+w, a+h)
+    
     background = background.crop(box)
+    
     for yh in range(height):
+    
         for xw in range(width):
+        
             dot=(xw,yh)
+            
             color_img = img.getpixel(dot)
+            
             color_background = background.getpixel(dot)
+            
             if(color_img[3]==0):
+            
                 img.putpixel(dot,color_background)
+    
     return img
     
 #风格迁移，调用paddlehub中的stylepro_artistic模型，可以对图像的风格进行转换
+
 stylepro_artistic = hub.Module(name="stylepro_artistic")
+
 result = stylepro_artistic.style_transfer(
+    
     images=[{
         'content': cv2.imread('test.png'),
         'styles': [cv2.imread('style.jpg')]
     }], 
+    
     alpha=1.5,
+    
     use_gpu=True,
+    
     visualization=True,
+    
     output_dir='transfer_result')
     
 ### 安装说明
@@ -115,7 +150,9 @@ DeepLabv3+ 是Google DeepLab语义分割系列网络的最新作，其前作有 
 
 ## 致谢
 
-通过七天训练营我感到非常充实，感谢百度飞桨团队这次举办的AI训练营，七天下来我收获颇多，对百度深度学习的框架有了更多深层次的了解，学习到了很多知识，受益匪浅！
+受七天打卡营的启发，于是做了这个项目参加paddlehub创意赛，paddlehub真的是个非常不错的预训练模型的应用工具，上手很简单，模型也很强大！
+
+七天的训练营下来我感到非常充实，感谢百度飞桨团队这次举办的AI训练营，七天下来我收获颇多，对百度深度学习的框架有了更多深层次的了解，学习到了很多知识，受益匪浅！
 
 在这里送给百度飞桨AI小鸭团队五星好评！！！炒鸡nice的课程，希望大家多多关注！！！
 
