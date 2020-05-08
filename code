@@ -1,7 +1,0 @@
-import paddlehub as hub
-import matplotlib.pyplot as plt
-import os
-import matplotlib.image as mpimg 
-import matplotlib
-import random
-from PIL import ImageFont,ImageDraw,Image
