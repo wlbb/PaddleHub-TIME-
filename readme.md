@@ -150,7 +150,7 @@ DeepLabv3+ 是Google DeepLab语义分割系列网络的最新作，其前作有 
 
 ## 结果
 
-![Image](https://raw.githubusercontent.com/wlbb/PaddleHub-TIME-/master/title.png）
+![image](https://raw.githubusercontent.com/wlbb/PaddleHub-TIME-/master/title.png）
 
 ## 致谢
 
