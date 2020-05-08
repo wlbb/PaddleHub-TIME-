@@ -150,6 +150,8 @@ DeepLabv3+ 是Google DeepLab语义分割系列网络的最新作，其前作有 
 
 ## 结果
 
+![Image text](https://raw.githubusercontent.com/wlbb/PaddleHub-TIME-/master/title.png）
+
 ## 致谢
 
 受七天打卡营的启发，于是做了这个项目参加paddlehub创意赛，paddlehub真的是个非常不错的预训练模型的应用工具，上手很简单，模型也很强大！
