@@ -1,7 +1,9 @@
 # PaddleHub 之 一键带你登上《TIME》时代周刊封面
 
 想登上《TIME》时代周刊封面吗？快来试试吧！本项目基于PaddleHub中的等预训练模型，实现一键抠图，图片融合，随机文本生成等功能。快速上手，炒鸡简单！！！
-本项目可以在百度大脑AIstudio中直接运行哦！传送门https://aistudio.baidu.com/aistudio/projectdetail/447445
+本项目可以在百度大脑AIstudio中直接运行哦！
+
+传送门https://aistudio.baidu.com/aistudio/projectdetail/447445
 
 ---
 ## 内容
@@ -66,48 +68,47 @@
 
         return str1, str2
 
-    #图像融合函数，将人像轮廓图片背景融合
+#图像融合函数，将人像轮廓图片背景融合
 
+    def fuse_back(img, background):
 
-        def fuse_back(img, background):
+        a = random.randint(0,20)
+            
+        img = img.convert('RGBA')
 
-            a = random.randint(0,20)
+        background = background.convert('RGBA')
 
-            img = img.convert('RGBA')
+        sp = img.size
 
-            background = background.convert('RGBA')
+        width = sp[0]
 
-            sp = img.size
+        height = sp[1]
 
-            width = sp[0]
+        sp2 = background.size
+        
+        w = sp2[0]
 
-            height = sp[1]
+        h = sp2[1]
 
-            sp2 = background.size
+        box = (a, a, a+w, a+h)
 
-            w = sp2[0]
+        background = background.crop(box)
 
-            h = sp2[1]
+        for yh in range(height):
 
-            box = (a, a, a+w, a+h)
+            for xw in range(width):
 
-            background = background.crop(box)
+                dot=(xw,yh)
 
-            for yh in range(height):
+                color_img = img.getpixel(dot)
 
-                for xw in range(width):
+                color_background = background.getpixel(dot)
 
-                    dot=(xw,yh)
+                if(color_img[3]==0):
 
-                    color_img = img.getpixel(dot)
+                    img.putpixel(dot,color_background)
 
-                    color_background = background.getpixel(dot)
-
-                    if(color_img[3]==0):
-
-                        img.putpixel(dot,color_background)
-
-            return img
+        return img
     
 #风格迁移，调用paddlehub中的stylepro_artistic模型，可以对图像的风格进行转换
 
